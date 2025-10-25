@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const REG_API_BASE = "http://localhost:5001/api/registrations";
+const CONFIG_API_BASE = "http://localhost:5001/api/config";
 
 /**
  * Upload CSV file to backend
@@ -20,7 +21,6 @@ export const uploadCSV = async (file) => {
 
 /**
  * Fetch stats for line graph (number of classes per day)
- * Add API in backend for /stats
  */
 export const getStats = async () => {
   const response = await axios.get(`${REG_API_BASE}/stats`);
@@ -29,7 +29,6 @@ export const getStats = async () => {
 
 /**
  * Fetch class schedule report
- * Add API in backend for /report
  */
 export const getReport = async (filters = {}) => {
   const params = new URLSearchParams(filters).toString();
@@ -37,4 +36,20 @@ export const getReport = async (filters = {}) => {
 
   const response = await axios.get(url);
   return response.data.data;
+};
+
+/**
+ * Fetch all config entries
+ */
+export const getConfigs = async () => {
+  const response = await axios.get(CONFIG_API_BASE);
+  return response.data.data;
+};
+
+/**
+ * Update a single config entry by key
+ */
+export const updateConfig = async (key, value) => {
+  const response = await axios.put(`${CONFIG_API_BASE}/${key}`, { value });
+  return response.data;
 };

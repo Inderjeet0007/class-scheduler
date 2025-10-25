@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 import UploadCSV from "./components/UploadCSV";
 import Stats from "./components/Stats";
 import Report from "./components/Report";
+import ConfigSettings from "./components/ConfigSettings";
 import { FaCalendarCheck, FaUpload, FaChartLine, FaTable, FaTools } from "react-icons/fa";
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/" element={<div className="component-container"><UploadCSV /></div>} />
             <Route path="/stats" element={<div className="component-container"><Stats /></div>} />
             <Route path="/report" element={<div className="component-container"><Report /></div>} />
+            <Route path="/config" element={<div className="component-container"><ConfigSettings /></div>} />
           </Routes>
         </main>
       </div>
