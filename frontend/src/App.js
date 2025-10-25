@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import UploadCSV from "./components/UploadCSV";
+import Stats from "./components/Stats";
+import Report from "./components/Report";
 import { FaCalendarCheck, FaUpload, FaChartLine, FaTable, FaTools } from "react-icons/fa";
 
 const App = () => {
@@ -32,6 +34,8 @@ const App = () => {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<div className="component-container"><UploadCSV /></div>} />
+            <Route path="/stats" element={<div className="component-container"><Stats /></div>} />
+            <Route path="/report" element={<div className="component-container"><Report /></div>} />
           </Routes>
         </main>
       </div>
