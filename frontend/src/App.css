@@ -50,6 +50,112 @@ h1 {
   letter-spacing: 0.5px;
 }
 
+/* Navigation links */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-item {
+  color: #dbe2ff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(3px);
+}
+
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-header {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .nav-item {
+    font-size: 0.9rem;
+    padding: 10px;
+    border-radius: 6px;
+  }
+}
+
+/* Card container for components */
+.component-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #1976d2;
+  color: white;
+}
+
+thead th {
+  padding: 10px;
+  text-align: left;
+}
+
+tbody td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
 /* Loading and messages */
 p {
   text-align: center;
