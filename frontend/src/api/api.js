@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const REG_API_BASE = "http://localhost:5001/api/registrations";
-const CONFIG_API_BASE = "http://localhost:5001/api/config";
+const REG_API_BASE = `${process.env.REACT_APP_PROD_API_BASE}/registrations`;
+const CONFIG_API_BASE = `${process.env.REACT_APP_PROD_API_BASE}/config`;
 
 /**
  * Upload CSV file to backend
