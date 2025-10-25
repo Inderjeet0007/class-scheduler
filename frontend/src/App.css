@@ -1,0 +1,80 @@
+/* Base styling */
+body {
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  /* padding: 20px; */
+  margin: 0;
+  color: #333;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Navigation styling */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+  background-color: #f4f6f8;
+}
+
+/* Sidebar base */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #3b5dcc 0%, #2d47a1 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  margin-right: 10px;
+}
+
+.sidebar-header h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Loading and messages */
+p {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+}
+
+/* Inputs & buttons for CSV upload */
+input[type="file"], input[type="text"], input[type="date"] {
+  padding: 6px 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+button:hover {
+  background-color: #115293;
+}
