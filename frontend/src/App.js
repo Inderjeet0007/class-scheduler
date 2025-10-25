@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+import UploadCSV from "./components/UploadCSV";
 import { FaCalendarCheck, FaUpload, FaChartLine, FaTable, FaTools } from "react-icons/fa";
 
 const App = () => {
@@ -27,7 +28,12 @@ const App = () => {
             </NavLink>
           </nav>
         </aside>
-    
+       
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<div className="component-container"><UploadCSV /></div>} />
+          </Routes>
+        </main>
       </div>
     </Router>
   );
