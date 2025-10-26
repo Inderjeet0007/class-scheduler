@@ -1,7 +1,7 @@
 {
   "short_name": "ClassScheduler",
   "name": "Driving Class Scheduler Dashboard",
-  "description": "A modern dashboard to manage, schedule, and track driving lessons efficiently for instructors and students.", 
+  "description": "A modern dashboard to manage, schedule, and track driving lessons efficiently for instructors and students.",
   "icons": [
     {
       "src": "favicon.ico",

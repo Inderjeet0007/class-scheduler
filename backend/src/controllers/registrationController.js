@@ -20,13 +20,24 @@ export const uploadRegistrations = async (req, res) => {
       const responses = [];
 
       for (const [index, row] of results.entries()) {
-        const { "Registration ID": registrationId, "Student ID": studentId, "Instructor ID": instructorId, "Class ID": classId, "Class Start Time": classStart, Action: action } = row;
+        const {
+          "Registration ID": registrationId,
+          "Student ID": studentId,
+          "Instructor ID": instructorId,
+          "Class ID": classId,
+          "Class Start Time": classStart,
+          Action: action,
+        } = row;
 
         try {
           if (action === "new") {
             // Ensure IDs are valid
             if (!studentId || !instructorId || !classId || !classStart) {
-              responses.push({ line: index + 1, status: "error", reason: "Missing required fields" });
+              responses.push({
+                line: index + 1,
+                status: "error",
+                reason: "Missing required fields",
+              });
               continue;
             }
 
@@ -35,11 +46,19 @@ export const uploadRegistrations = async (req, res) => {
             const classType = await ClassType.findOne({ classId });
 
             if (!instructor) {
-              responses.push({ line: index + 1, status: "error", reason: "Invalid instructorId" });
+              responses.push({
+                line: index + 1,
+                status: "error",
+                reason: "Invalid instructorId",
+              });
               continue;
             }
             if (!classType) {
-              responses.push({ line: index + 1, status: "error", reason: "Invalid classId" });
+              responses.push({
+                line: index + 1,
+                status: "error",
+                reason: "Invalid classId",
+              });
               continue;
             }
 
@@ -54,11 +73,15 @@ export const uploadRegistrations = async (req, res) => {
               studentId,
               instructorId,
               classId,
-              startTime: new Date(classStart)
+              startTime: new Date(classStart),
             });
 
             if (!validation.valid) {
-              responses.push({ line: index + 1, status: "error", reason: validation.reason });
+              responses.push({
+                line: index + 1,
+                status: "error",
+                reason: validation.reason,
+              });
               continue;
             }
 
@@ -69,19 +92,22 @@ export const uploadRegistrations = async (req, res) => {
               classId,
               startTime: new Date(classStart),
               endTime: validation.endTime,
-              date: validation.date
+              date: validation.date,
             });
 
             responses.push({
               line: index + 1,
               status: "success",
-              registrationId: newRegistration.registrationId
+              registrationId: newRegistration.registrationId,
             });
-
           } else if (action === "update") {
             const existing = await Registration.findOne({ registrationId });
             if (!existing) {
-              responses.push({ line: index + 1, status: "error", reason: "Registration ID not found" });
+              responses.push({
+                line: index + 1,
+                status: "error",
+                reason: "Registration ID not found",
+              });
               continue;
             }
 
@@ -90,11 +116,15 @@ export const uploadRegistrations = async (req, res) => {
               studentId: studentId || existing.studentId,
               instructorId: instructorId || existing.instructorId,
               classId: classId || existing.classId,
-              startTime: new Date(classStart)
+              startTime: new Date(classStart),
             });
 
             if (!validation.valid) {
-              responses.push({ line: index + 1, status: "error", reason: validation.reason });
+              responses.push({
+                line: index + 1,
+                status: "error",
+                reason: validation.reason,
+              });
               continue;
             }
 
@@ -106,20 +136,41 @@ export const uploadRegistrations = async (req, res) => {
             existing.date = validation.date;
             await existing.save();
 
-            responses.push({ line: index + 1, status: "success", registrationId: existing.registrationId });
-
+            responses.push({
+              line: index + 1,
+              status: "success",
+              registrationId: existing.registrationId,
+            });
           } else if (action === "delete") {
-            const deleted = await Registration.findOneAndDelete({ registrationId });
+            const deleted = await Registration.findOneAndDelete({
+              registrationId,
+            });
             if (!deleted) {
-              responses.push({ line: index + 1, status: "error", reason: "Registration ID not found" });
+              responses.push({
+                line: index + 1,
+                status: "error",
+                reason: "Registration ID not found",
+              });
               continue;
             }
-            responses.push({ line: index + 1, status: "success", message: "Deleted successfully" });
+            responses.push({
+              line: index + 1,
+              status: "success",
+              message: "Deleted successfully",
+            });
           } else {
-            responses.push({ line: index + 1, status: "error", reason: "Invalid action" });
+            responses.push({
+              line: index + 1,
+              status: "error",
+              reason: "Invalid action",
+            });
           }
         } catch (error) {
-          responses.push({ line: index + 1, status: "error", reason: error.message });
+          responses.push({
+            line: index + 1,
+            status: "error",
+            reason: error.message,
+          });
         }
       }
 
@@ -139,20 +190,22 @@ export const getStats = async (req, res) => {
       {
         $group: {
           _id: "$date",
-          count: { $sum: 1 }
-        }
+          count: { $sum: 1 },
+        },
       },
-      { $sort: { _id: 1 } } // sort by date ascending
+      { $sort: { _id: 1 } }, // sort by date ascending
     ]);
 
     if (!stats || stats.length === 0) {
-      return res.status(200).json({ message: "No registration stats found", data: [] });
+      return res
+        .status(200)
+        .json({ message: "No registration stats found", data: [] });
     }
 
     // Map _id to date field
     const result = stats.map((item) => ({
       date: item._id,
-      count: item.count
+      count: item.count,
     }));
 
     res.json({ message: "Stats retrieved successfully", data: result });
@@ -193,7 +246,9 @@ export const getReport = async (req, res) => {
     });
 
     if (!registrations || registrations.length === 0) {
-      return res.status(200).json({ message: "No registrations found", data: [] });
+      return res
+        .status(200)
+        .json({ message: "No registrations found", data: [] });
     }
 
     // Fetch all related instructors, students, and classes once
@@ -201,7 +256,9 @@ export const getReport = async (req, res) => {
     const students = await Student.find();
     const classes = await ClassType.find();
     const enrichedData = registrations.map((reg) => {
-      const instr = instructors.find((i) => i.instructorId === reg.instructorId);
+      const instr = instructors.find(
+        (i) => i.instructorId === reg.instructorId,
+      );
       const student = students.find((s) => s.studentId === reg.studentId);
       const classType = classes.find((c) => c.classId === reg.classId);
 

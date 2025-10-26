@@ -6,8 +6,13 @@ import Config from "../models/Config.js";
  * Validate if a new class schedule is allowed.
  * Checks student/instructor limits and overlapping sessions.
  */
-export const validateSchedule = async ({ studentId, instructorId, classId, startTime, registrationId = null }) => {
-
+export const validateSchedule = async ({
+  studentId,
+  instructorId,
+  classId,
+  startTime,
+  registrationId = null,
+}) => {
   // Fetch configuration from DB
   const configs = await Config.find({
     key: {
@@ -15,9 +20,9 @@ export const validateSchedule = async ({ studentId, instructorId, classId, start
         "CLASS_DURATION_MINUTES",
         "MAX_CLASSES_PER_STUDENT_PER_DAY",
         "MAX_CLASSES_PER_INSTRUCTOR_PER_DAY",
-        "MAX_CLASSES_PER_TYPE_PER_DAY"
-      ]
-    }
+        "MAX_CLASSES_PER_TYPE_PER_DAY",
+      ],
+    },
   });
 
   // Convert array of configs to a lookup object
@@ -25,7 +30,6 @@ export const validateSchedule = async ({ studentId, instructorId, classId, start
     acc[conf.key] = parseInt(conf.value); // store as number
     return acc;
   }, {});
-
 
   const duration = configMap.CLASS_DURATION_MINUTES || 45;
   const maxStudentPerDay = configMap.MAX_CLASSES_PER_STUDENT_PER_DAY || 3;
@@ -41,15 +45,13 @@ export const validateSchedule = async ({ studentId, instructorId, classId, start
   const overlapping = await Registration.findOne({
     date,
     $or: [{ studentId }, { instructorId }],
-    $and: [
-      { startTime: { $lt: endTime } },
-      { endTime: { $gt: startTime } }
-    ],
-    ...excludeCurrent
+    $and: [{ startTime: { $lt: endTime } }, { endTime: { $gt: startTime } }],
+    ...excludeCurrent,
   });
 
   if (overlapping) {
-    const conflictFor = overlapping.studentId === studentId ? "student" : "instructor";
+    const conflictFor =
+      overlapping.studentId === studentId ? "student" : "instructor";
     return { valid: false, reason: `Overlapping session for ${conflictFor}` };
   }
 
@@ -57,7 +59,7 @@ export const validateSchedule = async ({ studentId, instructorId, classId, start
   const studentCount = await Registration.countDocuments({
     studentId,
     date,
-    ...excludeCurrent
+    ...excludeCurrent,
   });
   if (studentCount >= maxStudentPerDay) {
     return { valid: false, reason: "Student daily class limit reached" };
@@ -67,7 +69,7 @@ export const validateSchedule = async ({ studentId, instructorId, classId, start
   const instructorCount = await Registration.countDocuments({
     instructorId,
     date,
-    ...excludeCurrent
+    ...excludeCurrent,
   });
   if (instructorCount >= maxInstructorPerDay) {
     return { valid: false, reason: "Instructor daily class limit reached" };
@@ -78,7 +80,7 @@ export const validateSchedule = async ({ studentId, instructorId, classId, start
     const typeCount = await Registration.countDocuments({
       classId,
       date,
-      ...excludeCurrent
+      ...excludeCurrent,
     });
     if (typeCount >= maxClassTypePerDay) {
       return { valid: false, reason: "Class-type daily limit reached" };

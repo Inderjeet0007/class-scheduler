@@ -32,7 +32,9 @@ export const getStats = async () => {
  */
 export const getReport = async (filters = {}) => {
   const params = new URLSearchParams(filters).toString();
-  const url = params ? `${REG_API_BASE}/report?${params}` : `${REG_API_BASE}/report`;
+  const url = params
+    ? `${REG_API_BASE}/report?${params}`
+    : `${REG_API_BASE}/report`;
 
   const response = await axios.get(url);
   return response.data.data;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getConfigs, updateConfig } from "../api/api";
-import { FaTimes, FaEdit, FaSave,  } from "react-icons/fa";
+import { FaTimes, FaEdit, FaSave } from "react-icons/fa";
 
 const ConfigSettings = () => {
   const [configs, setConfigs] = useState([]);
@@ -47,8 +47,9 @@ const ConfigSettings = () => {
     <div className="config-container">
       <h2>System Configuration</h2>
       <p className="config-desc">
-        This section allows you to view and adjust the system configuration settings that
-        control scheduling rules, such as class duration and maximum daily limits.
+        This section allows you to view and adjust the system configuration
+        settings that control scheduling rules, such as class duration and
+        maximum daily limits.
       </p>
 
       {statusMessage && (
@@ -59,7 +60,7 @@ const ConfigSettings = () => {
             borderRadius: "4px",
             color: statusType === "success" ? "#155724" : "#721c24",
             backgroundColor: statusType === "success" ? "#d4edda" : "#f8d7da",
-            border: `1px solid ${statusType === "success" ? "#c3e6cb" : "#f5c6cb"}`
+            border: `1px solid ${statusType === "success" ? "#c3e6cb" : "#f5c6cb"}`,
           }}
         >
           {statusMessage}
@@ -81,8 +82,8 @@ const ConfigSettings = () => {
           <tbody>
             {configs.map((conf) => (
               <tr key={conf.key}>
-                <td style={{  fontSize: "14px", }}>{conf.key}</td>
-                <td style={{  fontSize: "14px", textAlign: "center", }}>
+                <td style={{ fontSize: "14px" }}>{conf.key}</td>
+                <td style={{ fontSize: "14px", textAlign: "center" }}>
                   {editingKey === conf.key ? (
                     <input
                       type="text"
@@ -99,21 +100,24 @@ const ConfigSettings = () => {
                     conf.value
                   )}
                 </td>
-                <td style={{  fontSize: "14px", }}>{conf.description || "-"}</td>
-                <td style={{  textAlign: "center", }}>
+                <td style={{ fontSize: "14px" }}>{conf.description || "-"}</td>
+                <td style={{ textAlign: "center" }}>
                   {editingKey === conf.key ? (
                     <>
                       <button
                         className="save-btn"
                         onClick={() => handleSave(conf.key)}
-                        style={{  marginRight: "8%", backgroundColor: "#4caf50", }}
+                        style={{
+                          marginRight: "8%",
+                          backgroundColor: "#4caf50",
+                        }}
                       >
                         <FaSave />
                       </button>
                       <button
                         className="cancel-btn"
                         onClick={() => setEditingKey(null)}
-                        style={{  backgroundColor: "#c73c40ff", }}
+                        style={{ backgroundColor: "#c73c40ff" }}
                       >
                         <FaTimes />
                       </button>

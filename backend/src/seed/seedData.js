@@ -36,9 +36,24 @@ const seedData = async () => {
 
     // Seed class types
     const classes = await ClassType.insertMany([
-      { classId: "1", name: "Car Driving", description: "Basic car driving training", durationMinutes: 45 },
-      { classId: "2", name: "Motorcycle", description: "Bike driving training", durationMinutes: 30 },
-      { classId: "3", name: "Truck", description: "Heavy vehicle training", durationMinutes: 60 },
+      {
+        classId: "1",
+        name: "Car Driving",
+        description: "Basic car driving training",
+        durationMinutes: 45,
+      },
+      {
+        classId: "2",
+        name: "Motorcycle",
+        description: "Bike driving training",
+        durationMinutes: 30,
+      },
+      {
+        classId: "3",
+        name: "Truck",
+        description: "Heavy vehicle training",
+        durationMinutes: 60,
+      },
     ]);
 
     console.log("✅ Students, Instructors, and Classes seeded successfully!");
