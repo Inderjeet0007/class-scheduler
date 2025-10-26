@@ -1,5 +1,9 @@
 import express from "express";
-import { uploadRegistrations, getStats, getReport } from "../controllers/registrationController.js";
+import {
+  uploadRegistrations,
+  getStats,
+  getReport,
+} from "../controllers/registrationController.js";
 import { upload } from "../middleware/uploadMiddleware.js";
 
 const router = express.Router();

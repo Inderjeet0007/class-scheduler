@@ -20,13 +20,15 @@ router.put("/:key", async (req, res) => {
     const { value } = req.body;
 
     if (!key || value === undefined) {
-      return res.status(400).json({ success: false, error: "Key and value are required" });
+      return res
+        .status(400)
+        .json({ success: false, error: "Key and value are required" });
     }
 
     const updatedConfig = await Config.findOneAndUpdate(
       { key },
       { value },
-      { new: true, upsert: true } // create if missing
+      { new: true, upsert: true }, // create if missing
     );
 
     res.json({ success: true, data: updatedConfig });

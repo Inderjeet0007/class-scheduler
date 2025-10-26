@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
   },
   filename(req, file, cb) {
     cb(null, `upload-${Date.now()}${path.extname(file.originalname)}`);
-  }
+  },
 });
 
 // Only accept CSV files
@@ -23,5 +23,5 @@ export const upload = multer({
   storage,
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
-  }
+  },
 });

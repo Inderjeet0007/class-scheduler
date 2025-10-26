@@ -1,10 +1,21 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import UploadCSV from "./components/UploadCSV";
 import Stats from "./components/Stats";
 import Report from "./components/Report";
 import ConfigSettings from "./components/ConfigSettings";
-import { FaCalendarCheck, FaUpload, FaChartLine, FaTable, FaTools } from "react-icons/fa";
+import {
+  FaCalendarCheck,
+  FaUpload,
+  FaChartLine,
+  FaTable,
+  FaTools,
+} from "react-icons/fa";
 
 const App = () => {
   return (
@@ -12,32 +23,74 @@ const App = () => {
       <div className="dashboard-layout">
         <aside className="sidebar">
           <div className="sidebar-header">
-            <div className="logo"><FaCalendarCheck /></div>
+            <div className="logo">
+              <FaCalendarCheck />
+            </div>
             <h2>Class Scheduler</h2>
           </div>
 
           <nav className="sidebar-nav">
             <NavLink to="/" end className="nav-item">
-              <span className="nav-icon"><FaUpload /></span> Upload CSV
+              <span className="nav-icon">
+                <FaUpload />
+              </span>{" "}
+              Upload CSV
             </NavLink>
             <NavLink to="/stats" className="nav-item">
-              <span className="nav-icon"><FaChartLine /></span> Stats
+              <span className="nav-icon">
+                <FaChartLine />
+              </span>{" "}
+              Stats
             </NavLink>
             <NavLink to="/report" className="nav-item">
-              <span className="nav-icon"><FaTable /></span> Report
+              <span className="nav-icon">
+                <FaTable />
+              </span>{" "}
+              Report
             </NavLink>
             <NavLink to="/config" className="nav-item">
-              <span className="nav-icon"><FaTools /></span> Configuration
+              <span className="nav-icon">
+                <FaTools />
+              </span>{" "}
+              Configuration
             </NavLink>
           </nav>
         </aside>
-       
+
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<div className="component-container"><UploadCSV /></div>} />
-            <Route path="/stats" element={<div className="component-container"><Stats /></div>} />
-            <Route path="/report" element={<div className="component-container"><Report /></div>} />
-            <Route path="/config" element={<div className="component-container"><ConfigSettings /></div>} />
+            <Route
+              path="/"
+              element={
+                <div className="component-container">
+                  <UploadCSV />
+                </div>
+              }
+            />
+            <Route
+              path="/stats"
+              element={
+                <div className="component-container">
+                  <Stats />
+                </div>
+              }
+            />
+            <Route
+              path="/report"
+              element={
+                <div className="component-container">
+                  <Report />
+                </div>
+              }
+            />
+            <Route
+              path="/config"
+              element={
+                <div className="component-container">
+                  <ConfigSettings />
+                </div>
+              }
+            />
           </Routes>
         </main>
       </div>

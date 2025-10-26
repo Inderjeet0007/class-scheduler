@@ -25,6 +25,9 @@ yarn-error.log*
 /.pnp
 .pnp.js
 
+# Environment file
+/frontend/.env
+
 # Production build
 /frontend/build
 
