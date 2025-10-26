@@ -74,6 +74,7 @@ export const uploadRegistrations = async (req, res) => {
               instructorId,
               classId,
               startTime: new Date(classStart),
+              registrationId,
             });
 
             if (!validation.valid) {
@@ -117,6 +118,7 @@ export const uploadRegistrations = async (req, res) => {
               instructorId: instructorId || existing.instructorId,
               classId: classId || existing.classId,
               startTime: new Date(classStart),
+              registrationId,
             });
 
             if (!validation.valid) {
