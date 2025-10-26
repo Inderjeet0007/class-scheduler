@@ -39,7 +39,9 @@ export const validateSchedule = async ({
   const date = moment(startTime).format("YYYY-MM-DD");
 
   // Build a filter to exclude the current registration if updating
-  const excludeCurrent = registrationId ? { _id: { $ne: registrationId } } : {};
+  const excludeCurrent = registrationId
+    ? { registrationId: { $ne: registrationId } }
+    : {};
 
   // Check overlapping sessions (for same student or instructor)
   const overlapping = await Registration.findOne({
